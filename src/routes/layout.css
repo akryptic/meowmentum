@@ -1,0 +1,28 @@
+@import 'tailwindcss';
+
+/* dm-sans-latin-ext-wght-normal */
+@font-face {
+	font-family: 'Space Grotesk';
+	src: url('/fonts/space-grotesk.woff2') format('woff2');
+	font-weight: 300 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@theme {
+  --font-sans: "Space Grotesk", sans-serif;
+
+	--color-background: #22272c;
+	--color-primary: #129b70;
+}
+
+hmtl,
+body {
+	width: 100%;
+	height: 100vh;
+	color: white;
+}
+
+body {
+	@apply font-sans border-[3px] border-white/15 bg-background tracking-wider;
+}
