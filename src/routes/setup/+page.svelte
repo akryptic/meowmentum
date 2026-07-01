@@ -97,7 +97,7 @@
 	});
 </script>
 
-<main class="flex h-full w-full flex-col items-center justify-center">
+<main data-tauri-drag-region class="flex h-full w-full flex-col items-center justify-center">
 	<Loader --color="" --scale="1.75" --speed="1" />
 
 	{#if state.loadingText}

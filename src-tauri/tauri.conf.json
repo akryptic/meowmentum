@@ -13,10 +13,10 @@
 		"windows": [
 			{
 				"url": "/setup",
-				"title": "Moementum",
+				"title": "Meomentum | Setup",
 				"label": "setup",
-				"width": 240,
-				"height": 420,
+				"width": 320,
+				"height": 560,
 				"resizable": false,
 				"fullscreen": false,
 				"center": true,

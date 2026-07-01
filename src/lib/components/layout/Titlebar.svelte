@@ -22,6 +22,7 @@
 </script>
 
 <header
+	data-tauri-drag-region
 	class="border-b border-[#5A605BA0] max-h-7 h-7 bg-black/25 flex items-center px-3 py-1 justify-between"
 >
 	<span class="inline-block leading-4 font-bold tracking-wider text-primary brightness-150">

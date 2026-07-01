@@ -1,6 +1,5 @@
 @import 'tailwindcss';
 
-/* dm-sans-latin-ext-wght-normal */
 @font-face {
 	font-family: 'Space Grotesk';
 	src: url('/fonts/space-grotesk.woff2') format('woff2');
@@ -10,19 +9,32 @@
 }
 
 @theme {
-  --font-sans: "Space Grotesk", sans-serif;
-
+	--font-sans: 'Space Grotesk', sans-serif;
 	--color-background: #22272c;
 	--color-primary: #129b70;
 }
 
-hmtl,
+html,
 body {
 	width: 100%;
-	height: 100vh;
-	color: white;
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+	box-sizing: border-box;
+
+	@apply font-sans text-white;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: inherit;
+}
+
+*[data-tauri-drag-region] {
+	app-region: drag;
 }
 
 body {
-	@apply font-sans border-[3px] border-white/15 bg-background tracking-wider;
+	@apply border-[3px] border-white/10 bg-background;
 }
