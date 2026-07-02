@@ -2,8 +2,7 @@ name: Build Tauri App
 
 on:
   push:
-    branches: [main]
-  pull_request:
+    branches: [test-builds]
   workflow_dispatch:
 
 jobs:
