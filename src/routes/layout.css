@@ -10,7 +10,10 @@
 
 @theme {
 	--font-sans: 'Space Grotesk', sans-serif;
-	--color-background: #22272c;
+
+	--color-surface-light: #2D333B;
+	--color-surface: #1E2329;
+
 	--color-primary: #129b70;
 }
 
@@ -36,5 +39,5 @@ body {
 }
 
 body {
-	@apply border-[3px] border-white/10 bg-background;
+	@apply font-sans border-[3px] border-surface bg-surface tracking-wider;
 }
