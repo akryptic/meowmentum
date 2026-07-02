@@ -1,4 +1,4 @@
-name: Build Tauri App
+name: Test Tauri Build
 
 on:
   push:
@@ -12,15 +12,15 @@ jobs:
       matrix:
         include:
           - os: ubuntu-22.04
-            artifact-name: linux-build
+            artifact-name: linux-test-build
           - os: windows-latest
-            artifact-name: windows-build
+            artifact-name: windows-test-build
 
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install Linux dependencies
         if: runner.os == 'Linux'
@@ -37,16 +37,17 @@ jobs:
             file \
             libssl-dev
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
         with:
           version: 10
           run_install: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
