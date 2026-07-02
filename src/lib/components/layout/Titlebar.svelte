@@ -23,14 +23,14 @@
 
 <header
 	data-tauri-drag-region
-	class="border-b border-[#5A605BA0] max-h-7 h-7 bg-black/25 flex items-center px-3 py-1 justify-between"
+	class="col-span-2 border-b border-surface-light max-h-7 h-7 bg-black/25 flex items-center px-3 py-1 justify-between"
 >
 	<span class="inline-block leading-4 font-bold tracking-wider text-primary brightness-150">
 		Meomentum
 	</span>
 	<span class="text-sm font-semibold text-white inline-block">{time}</span>
 	<div class="text-sm font-extrabold flex gap-4 items-center text-white/50">
-		<div class="flex pr-4 gap-3 border-r border-[#5A605BFA] items-center">
+		<div class="flex pr-4 gap-3 border-r border-surface-light items-center">
 			{@render icon_button({
 				label: 'User',
 				Icon: UserRound
