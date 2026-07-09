@@ -11,10 +11,8 @@
 @theme {
 	--font-sans: 'Space Grotesk', sans-serif;
 
-	--color-surface-light: #2D333B;
-	--color-surface: #1E2329;
-
-	--color-primary: #129b70;
+	--color-surface-light: #2d333b;
+	--color-surface: #1e2329;
 }
 
 html,
@@ -24,6 +22,9 @@ body {
 	margin: 0;
 	overflow: hidden;
 	box-sizing: border-box;
+
+	overscroll-behavior: none;
+	touch-action: pan-x pan-y;
 
 	@apply font-sans text-white;
 }
@@ -39,5 +40,5 @@ body {
 }
 
 body {
-	@apply font-sans border-[3px] border-surface bg-surface tracking-wider;
+	@apply border-[3px] border-surface-light bg-surface font-sans tracking-wider;
 }
