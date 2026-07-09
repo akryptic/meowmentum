@@ -6,7 +6,7 @@
 	let { children }: { children: Snippet } = $props();
 </script>
 
-<div class="w-full h-full grid grid-cols-[16rem_1fr] grid-rows-[auto_1fr]">
+<div class="w-full h-full grid grid-cols-[auto_1fr] grid-rows-[auto_1fr]">
 	<Titlebar />
 	<Sidebar />
 	{@render children()}
