@@ -6,8 +6,6 @@
 	let { children }: { children: Snippet } = $props();
 
 	function disableMenu() {
-		console.log(window.location);
-		
 		if (window.location.hostname !== 'tauri.localhost') {
 			return;
 		}

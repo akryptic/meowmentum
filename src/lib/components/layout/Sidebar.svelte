@@ -2,11 +2,18 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { type ResolvedPathname } from '$app/types';
-
-	console.log(page);
+	import appState, { DriveProvider } from '$lib/store/app.svelte';
 
 	import { isPathActive } from '$lib/utils';
-	import { Compass, LayoutGrid, ScrollText, Settings2, type LucideIcon } from '@lucide/svelte';
+	import {
+		CloudOff,
+		Compass,
+		HardDrive,
+		LayoutGrid,
+		ScrollText,
+		Settings2,
+		type LucideIcon
+	} from '@lucide/svelte';
 </script>
 
 <div class="bg-black/25 border-r border-surface-light flex flex-col">
@@ -24,7 +31,7 @@
 		})}
 
 		{@render menu_item({
-			label: 'Evidece',
+			label: 'Evidence',
 			href: resolve('/evidence'),
 			Icon: ScrollText
 		})}
@@ -36,10 +43,39 @@
 		})}
 	</ul>
 
-	<div class="p-4">
+	<div class="p-3">
+		<div
+			class="flex items-center gap-3 rounded border border-white/6
+		       bg-white/[0.035] px-3 py-2.5"
+		>
+			<div class="grid size-10 shrink-0 place-items-center rounded-md bg-white/4 text-white/60">
+				{#if appState.driveProvider == DriveProvider.NONE}
+					<CloudOff />
+				{:else}
+					<HardDrive />
+				{/if}
+			</div>
 
-		<div class="p-4 border border-surface-light rounded-lg bg-surface-light/50">
-			Todo: Sync Section
+			{#if appState.driveProvider == DriveProvider.NONE}
+				<span class="truncate text-sm font-medium opacity-75" >Not Selected</span>
+			{:else}
+				<div class="min-w-0 flex-1">
+					<div class="truncate text-sm font-medium text-white/80">
+						{appState.driveProvider == DriveProvider.GOOGLE_DRIVE ? 'Google Drive' : 'One Drive'}
+					</div>
+
+					<div class="mt-0.5 flex items-center gap-1.5 text-white/55">
+						<span
+							class="size-1.5 rounded-full {appState.driveStatus == 'connected'
+								? 'bg-emerald-500'
+								: 'bg-red-400 pulse'}"
+						></span>
+						<span class="truncate text-xs opacity-85">
+							{appState.driveStatus == 'connected' ? 'Connected' : 'Disconnected'}
+						</span>
+					</div>
+				</div>
+			{/if}
 		</div>
 	</div>
 </div>
@@ -47,8 +83,7 @@
 {#snippet menu_item({
 	label,
 	href,
-	Icon,
-	icon_size = 20
+	Icon
 }: {
 	label: string;
 	href: ResolvedPathname;
@@ -58,13 +93,30 @@
 })}
 	<a
 		{href}
-		class="py-2 px-4 rounded-lg {isPathActive(page.url.pathname, href)
-			? 'font-semibold bg-white/10 border-r-3 border-primary/75 bg-linear-to-r from-emeral-400y/0 to-primary/15 opacity-100 text-green-100'
-			: 'hover:bg-linear-to-r from-white/5 to-primary/15 opacity-75'}"
+		class="flex h-10 items-center gap-3 rounded-lg px-3 transition
+		{isPathActive(page.url.pathname, href)
+			? 'bg-linear-to-r from-emerald-200/4 to-emerald-400/16 text-emerald-200 border-2 border-emerald-500/75'
+			: 'text-white/55 hover:bg-white/4 hover:text-white/75'}"
 	>
-		<div class="flex text-lg items-center gap-2">
-			<Icon strokeWidth={isPathActive(page.url.pathname, href) ? 2 : 1.5} size={icon_size} />
-			{label}
-		</div>
+		<Icon strokeWidth={isPathActive(page.url.pathname, href) ? 1.9 : 1.6} size={18} />
+		<span class="truncate">{label}</span>
 	</a>
 {/snippet}
+
+<style>
+	@keyframes pulse {
+		0%,
+		100% {
+			opacity: 1;
+			transform: scale(1);
+		}
+		50% {
+			opacity: 0.5;
+			transform: scale(1.1);
+		}
+	}
+
+	.pulse {
+		animation: pulse 2.5s ease infinite;
+	}
+</style>
