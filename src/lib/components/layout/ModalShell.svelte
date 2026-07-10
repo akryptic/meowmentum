@@ -39,7 +39,12 @@
 				<modalManager.icon size={14} strokeWidth={1.5} class="opacity-75" />
 				{modalManager.title}
 
-				<div class="ml-auto">
+				<div class="ml-auto flex items-center gap-3 text-white/45">
+					{#if modalManager.quickActions}
+						<div class="flex items-center gap-2.5 border-r border-surface-light pr-3">
+							{@render modalManager.quickActions()}
+						</div>
+					{/if}
 					<IconButton label="Close" Icon={X} onclick={() => modalManager.close()} />
 				</div>
 			</div>

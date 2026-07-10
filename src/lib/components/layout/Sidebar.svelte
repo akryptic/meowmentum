@@ -2,9 +2,11 @@
 	import { resolve } from '$app/paths';
 	import { page } from '$app/state';
 	import { type ResolvedPathname } from '$app/types';
+	import appState, { DriveProvider } from '$lib/store/app.svelte';
 
 	import { isPathActive } from '$lib/utils';
 	import {
+		CloudOff,
 		Compass,
 		HardDrive,
 		LayoutGrid,
@@ -47,17 +49,33 @@
 		       bg-white/[0.035] px-3 py-2.5"
 		>
 			<div class="grid size-10 shrink-0 place-items-center rounded-md bg-white/4 text-white/60">
-				<HardDrive />
+				{#if appState.driveProvider == DriveProvider.NONE}
+					<CloudOff />
+				{:else}
+					<HardDrive />
+				{/if}
 			</div>
 
-			<div class="min-w-0 flex-1">
-				<div class="truncate text-sm font-medium text-white/80">Google Drive</div>
+			{#if appState.driveProvider == DriveProvider.NONE}
+				<span class="truncate text-sm font-medium opacity-75" >Not Selected</span>
+			{:else}
+				<div class="min-w-0 flex-1">
+					<div class="truncate text-sm font-medium text-white/80">
+						{appState.driveProvider == DriveProvider.GOOGLE_DRIVE ? 'Google Drive' : 'One Drive'}
+					</div>
 
-				<div class="mt-0.5 flex items-center gap-1.5 text-white/55">
-					<span class="size-1.5 rounded-full bg-emerald-400"></span>
-					<span class="truncate text-xs opacity-85">Synced 2 min ago</span>
+					<div class="mt-0.5 flex items-center gap-1.5 text-white/55">
+						<span
+							class="size-1.5 rounded-full {appState.driveStatus == 'connected'
+								? 'bg-emerald-500'
+								: 'bg-red-400 pulse'}"
+						></span>
+						<span class="truncate text-xs opacity-85">
+							{appState.driveStatus == 'connected' ? 'Connected' : 'Disconnected'}
+						</span>
+					</div>
 				</div>
-			</div>
+			{/if}
 		</div>
 	</div>
 </div>
@@ -98,7 +116,7 @@
 		}
 	}
 
-	/* .pulse {
+	.pulse {
 		animation: pulse 2.5s ease infinite;
-	} */
+	}
 </style>

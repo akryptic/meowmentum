@@ -11,7 +11,7 @@
 @theme {
 	--font-sans: 'Space Grotesk', sans-serif;
 
-	--color-surface-light: #2d333b;
+	--color-surface-light: oklab(31.467% -0.00411 -0.01612);
 	--color-surface: #1e2329;
 }
 
